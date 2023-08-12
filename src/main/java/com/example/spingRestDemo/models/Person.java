@@ -3,13 +3,9 @@ package com.example.spingRestDemo.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -23,9 +19,10 @@ public class Person {
     @Column(name = "name")
     private String name;
 
-    @Min(value = 0)
-    @Column(name = "age")
-    private int age;
+
+    @NotEmpty
+    @Column(name = "password")
+    private String password;
 
     @Email
     @NotEmpty
@@ -38,17 +35,12 @@ public class Person {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @NotEmpty
-    @Column(name = "created_who")
-    private String createdWho;
-
-
     public Person() {
     }
 
-    public Person(String name, int age, String email) {
+    public Person(String name, String password, String email) {
         this.name = name;
-        this.age = age;
+        this.password = password;
         this.email = email;
     }
 
@@ -68,12 +60,12 @@ public class Person {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -98,22 +90,5 @@ public class Person {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public String getCreatedWho() {
-        return createdWho;
-    }
-
-    public void setCreatedWho(String createdWho) {
-        this.createdWho = createdWho;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
     }
 }

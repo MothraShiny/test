@@ -1,8 +1,9 @@
 package com.example.spingRestDemo.services;
 
+import com.example.spingRestDemo.mappers.PersonMapper;
 import com.example.spingRestDemo.models.Person;
 import com.example.spingRestDemo.repositories.PeopleRepository;
-import com.example.spingRestDemo.util.exceptions.PersonNotFoundException;
+import com.example.spingRestDemo.util.PersonNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,13 +34,19 @@ public class PeopleService {
 
     @Transactional
     public void save(Person person) {
-        addServerData(person);
+        person.setCreatedAt(LocalDateTime.now());
+        person.setUpdatedAt(LocalDateTime.now());
 
         peopleRepository.save(person);
     }
 
     @Transactional
     public void update(int id, Person person) {
+        Person targetPerson = findOne(id);
+
+        person.setCreatedAt(targetPerson.getCreatedAt());
+        person.setUpdatedAt(LocalDateTime.now());
+
         person.setId(id);
         peopleRepository.save(person);
     }
@@ -55,16 +62,6 @@ public class PeopleService {
 
     public List<Person> findByEmail(String email) {
         return peopleRepository.findByEmail(email);
-    }
-
-    public List<Person> findByAgeGreaterThan(int age) {
-        return peopleRepository.findByAgeGreaterThan(age);
-    }
-
-    private void addServerData(Person person) {
-        person.setCreatedAt(LocalDateTime.now());
-        person.setUpdatedAt(LocalDateTime.now());
-        person.setCreatedWho("APP");
     }
 
 }

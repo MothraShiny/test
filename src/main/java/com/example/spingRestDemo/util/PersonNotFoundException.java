@@ -1,4 +1,4 @@
-package com.example.spingRestDemo.util.exceptions;
+package com.example.spingRestDemo.util;
 
 public class PersonNotFoundException extends RuntimeException{
 }
