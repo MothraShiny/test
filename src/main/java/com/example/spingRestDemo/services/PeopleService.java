@@ -1,6 +1,5 @@
 package com.example.spingRestDemo.services;
 
-import com.example.spingRestDemo.mappers.PersonMapper;
 import com.example.spingRestDemo.models.Person;
 import com.example.spingRestDemo.repositories.PeopleRepository;
 import com.example.spingRestDemo.util.PersonNotFoundException;
