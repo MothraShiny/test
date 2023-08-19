@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PersonMapper {
+public class PersonMapper{
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PersonMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public PersonMapper() {
+        this.modelMapper = new ModelMapper();
     }
 
     public Person convertToPerson(PersonDTO personDTO) {
